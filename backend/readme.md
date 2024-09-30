@@ -20,37 +20,39 @@ Before starting, ensure you have the following installed on your Ubuntu 22.04 se
 
 ### Step 1: Clone the repository
 
-cd backend
+```cd backend```
 
 ## Step 2: Install Node.js and npm
 If you haven't already installed Node.js and npm, do so with the following commands:
 
+```
 sudo apt update
 sudo apt install nodejs npm
 node -v
 npm -v
+```
 
 ## Step 3: Install MySQL
 You need a MySQL server running on your machine. If it's not installed, install it with:
-
+```
 sudo apt install mysql-server
 sudo systemctl start mysql
 sudo mysql_secure_installation
-
+```
 After installation, log into MySQL and create a database for the project:
-
+```
 mysql -u root -p
 CREATE DATABASE db_name;
 EXIT;
-
+```
 ## Step 4: Install Dependencies
 Install the required Node.js packages by running:
-
+```
 npm install
-
+```
 ## Step 5: Set up the Environment Variables
 Create a .env file in the project root and add your environment variables as follows:
-
+```
 TELEGRAM_BOT_TOKEN=your_telegram_bot_token
 WEBHOOK_URL=https://yourdomain.com
 DB_HOST=localhost
@@ -58,24 +60,24 @@ DB_USER=your_mysql_username
 DB_PASSWORD=your_mysql_password
 DB_NAME=db_name
 PORT=1111
-
+```
 Make sure the .env file is properly configured with your Telegram bot token and MySQL credentials.
 
 ## Step 6: Run Database Migrations
 If there are database migrations or schema setup scripts, run them to initialize your database schema.
-
+```
 # In MySQL CLI
 USE db_name;
 SOURCE path_to_your_sql_file.sql;
-
+```
 ## Step 7: Set up Nginx
 Install and configure Nginx as a reverse proxy for the backend.
-
+```
 sudo apt install nginx
 sudo nano /etc/nginx/sites-available/default
-
+```
 Add the following Nginx configuration:
-
+```
 server {
     listen 80;
     server_name api.yourdomain.com;
@@ -96,10 +98,10 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 }
-
+```
 After configuring, restart Nginx:
-
+```
 sudo systemctl restart nginx
-
+```
 
 
